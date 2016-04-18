@@ -20,5 +20,5 @@ void FileDialog::on_fileDialogCancelBtn_clicked()
 
 void FileDialog::on_fileDialogNextBtn_clicked()
 {
-    //Test
+
 }
