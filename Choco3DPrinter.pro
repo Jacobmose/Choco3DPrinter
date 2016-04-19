@@ -17,13 +17,13 @@ SOURCES += main.cpp\
     devicedialog.cpp \
     figuredialog.cpp \
     filedialog.cpp \
-    fileio.cpp
+    gcodehandler.cpp
 
 HEADERS  += mainwindow.h \
     devicedialog.h \
     figuredialog.h \
     filedialog.h \
-    fileio.h
+    gcodehandler.h
 
 FORMS    += mainwindow.ui \
     devicedialog.ui \

@@ -9,7 +9,7 @@
 
 #include <QModelIndex>
 
-#include <QDirIterator>
+#include "gcodehandler.h"
 
 namespace Ui {
 class FigureDialog;
@@ -21,7 +21,9 @@ class FigureDialog : public QDialog
 
 public:
     explicit FigureDialog(QWidget *parent = 0);
-    ~FigureDialog();   
+    ~FigureDialog();
+
+    QString getSelectedListViewItem();
 
 private slots:
 
@@ -33,9 +35,9 @@ private:
     Ui::FigureDialog *ui;
     QStringListModel *stringListModel;
     QStringListModel *modelTest;
-    QDirIterator *dirIterator;
-    void getFigureFileDirectory();
-    QStringList getGCodesFromFile(QString);
+    GCodeHandler *gcodeHandle;
+    void showFigureFileDirectory();
+
 };
 
 #endif // FIGUREDIALOG_H
