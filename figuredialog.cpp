@@ -7,7 +7,7 @@ FigureDialog::FigureDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    getFigureFileDirectory();
+    showFigureFileDirectory();
 }
 
 FigureDialog::~FigureDialog()
@@ -17,22 +17,12 @@ FigureDialog::~FigureDialog()
 
 void FigureDialog::on_figureDialogNextBtn_clicked()
 {
-    QStringList test;
-    QString string;
-
     modelTest = new QStringListModel(this);
 
-    ui->figureListView->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    QString itemName;
+    itemName = getSelectedListViewItem();
 
-    foreach(const QModelIndex &index,
-            ui->figureListView->selectionModel()->selectedIndexes())
-        test.append(index.data(Qt::DisplayRole).toString());
-
-    foreach(string, test)
-
-    modelTest->setStringList(getGCodesFromFile(string));
-
-    //modelTest->setStringList(test);
+    modelTest->setStringList(gcodeHandle->getGCodesFromFile(itemName));
 
     ui->listView->setModel(modelTest);
 }
@@ -42,45 +32,28 @@ void FigureDialog::on_figureDialogCancelBtn_clicked()
     close();
 }
 
-QStringList FigureDialog::getGCodesFromFile(QString fileName)
+QString FigureDialog::getSelectedListViewItem()
 {
-    QString name = fileName;
-    QFile file("C:/Users/jacobmosehansen/Desktop/Test/" + name);
+    QString itemName;
 
-    QStringList fileData;
-    QString lineData;
+    ui->figureListView->setSelectionMode(QAbstractItemView::ExtendedSelection);
 
-    if(file.open(QIODevice::ReadOnly))
-    {
-        QTextStream i(&file);
-        while(!i.atEnd())
-        {
-            lineData = i.readLine();
-            fileData.append(lineData);
+    foreach(const QModelIndex &index,
+            ui->figureListView->selectionModel()->selectedIndexes())
+        itemName = index.data(Qt::DisplayRole).toString();
 
-        }
-        file.close();
-    }
-
-    return fileData;
+    return itemName;
 }
 
-void FigureDialog::getFigureFileDirectory()
+void FigureDialog::showFigureFileDirectory()
 {
+    QStringList fileDirectoryList;
+
+    fileDirectoryList = gcodeHandle->getFigureFileDirectory();
+
     stringListModel = new QStringListModel(this);
 
-    QDir figureDir("C:/Users/jacobmosehansen/Desktop/Test");
-    figureDir.setNameFilters(QStringList("*.gcode"));
-    figureDir.setFilter(QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks);
-
-    QStringList figureList = figureDir.entryList();
-
-    for(int i=0; i<figureList.count(); i++)
-    {
-        figureList[i];
-    }
-
-    stringListModel->setStringList(figureList);
+    stringListModel->setStringList(fileDirectoryList);
 
     ui->figureListView->setModel(stringListModel);
 }
