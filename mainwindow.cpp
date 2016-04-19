@@ -15,8 +15,27 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::on_newPrintBtn_clicked()
-{    
-    DeviceDialog deviceDialog;
-    deviceDialog.setModal(true);
-    deviceDialog.exec();
+{
+  DeviceDialog deviceDialog;
+  FigureDialog figureDialog;
+  FileDialog fileDialog;
+
+  deviceDialog.setModal(true);
+  deviceDialog.exec();
+
+  switch (deviceDialog.btnNumber)
+  {
+    case 0:
+      break;
+    case 1:
+          figureDialog.setModal(true);
+          figureDialog.exec();
+      break;
+    case 2:
+          fileDialog.setModal(true);
+          fileDialog.exec();
+      break;
+    default:
+      break;
+  }
 }
