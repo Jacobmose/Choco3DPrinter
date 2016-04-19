@@ -17,7 +17,6 @@ MainWindow::~MainWindow()
 void MainWindow::on_newPrintBtn_clicked()
 {    
     DeviceDialog deviceDialog;
-    FigureDialog figureDialog;
     deviceDialog.setModal(true);
     deviceDialog.exec();
 }

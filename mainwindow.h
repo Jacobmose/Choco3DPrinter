@@ -3,8 +3,6 @@
 
 #include <QMainWindow>
 #include <devicedialog.h>
-#include <figuredialog.h>
-#include <gcodehandler.h>
 #include <QPushButton>
 
 namespace Ui {
