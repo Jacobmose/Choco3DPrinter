@@ -20,4 +20,6 @@ void MainWindow::on_newPrintBtn_clicked()
     FigureDialog figureDialog;
     deviceDialog.setModal(true);
     deviceDialog.exec();
+
+    //test
 }
