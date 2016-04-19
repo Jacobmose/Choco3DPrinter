@@ -43,3 +43,69 @@ QStringList GCodeHandler::getFigureFileDirectory()
 
     return figureList;
 }
+
+void GCodeHandler::handleAndSendGCodes(QString fileName)
+{
+    QSerialPort serial;
+    serial.setPortName("");
+
+    QString name = fileName;
+
+    QString lineData;
+
+    if(serial.open(QIODevice::ReadWrite))
+    {
+        serial.setBaudRate(QSerialPort::Baud57600);
+        serial.setDataBits(QSerialPort::Data8);
+        serial.setParity(QSerialPort::NoParity);
+        serial.setStopBits(QSerialPort::OneStop);
+        serial.setFlowControl(QSerialPort::NoFlowControl);
+
+        QFile file("C:/Users/jacobmosehansen/Desktop/Test/" + name);
+
+        if(file.open(QIODevice::ReadOnly))
+        {
+            QTextStream i(&file);
+            while(!i.atEnd())
+            {
+                serial.write("M119");
+                lineData = i.readLine();
+
+                //Check for ack
+                if(serial.readLine() == "ok")
+                {
+                    serial.write((const char*)lineData.data());
+                } else {
+                    //Wrong read
+                }
+
+            }
+            file.close();
+        }
+        serial.close();
+    } else {
+        //Serial Error
+    }
+}
+
+void GCodeHandler::sendGCode()
+{
+    QSerialPort serial;
+    serial.setPortName("");
+
+    if(serial.open(QIODevice::ReadWrite))
+    {
+        serial.setBaudRate(QSerialPort::Baud57600);
+        serial.setDataBits(QSerialPort::Data8);
+        serial.setParity(QSerialPort::NoParity);
+        serial.setStopBits(QSerialPort::OneStop);
+        serial.setFlowControl(QSerialPort::NoFlowControl);
+
+        serial.write("M119");
+
+        serial.close();
+    } else {
+        //Serial Error
+    }
+
+}
