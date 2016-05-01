@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui serialport
+QT       += 3dcore gui serialport opengl 3drender 3dinput
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,13 +17,17 @@ SOURCES += main.cpp\
     devicedialog.cpp \
     figuredialog.cpp \
     filedialog.cpp \
-    gcodehandler.cpp
+    gcodehandler.cpp \
+    scenehandler.cpp \
+    scenewindow.cpp
 
 HEADERS  += mainwindow.h \
     devicedialog.h \
     figuredialog.h \
     filedialog.h \
-    gcodehandler.h
+    gcodehandler.h \
+    scenehandler.h \
+    scenewindow.h
 
 FORMS    += mainwindow.ui \
     devicedialog.ui \

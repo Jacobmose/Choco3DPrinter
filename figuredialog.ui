@@ -55,7 +55,17 @@
      <x>240</x>
      <y>10</y>
      <width>251</width>
-     <height>221</height>
+     <height>61</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QOpenGLWidget" name="openGLWidget">
+   <property name="geometry">
+    <rect>
+     <x>249</x>
+     <y>89</y>
+     <width>231</width>
+     <height>131</height>
     </rect>
    </property>
   </widget>

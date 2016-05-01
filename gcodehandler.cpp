@@ -49,9 +49,10 @@ void GCodeHandler::handleAndSendGCodes(QString fileName)
     QSerialPort serial;
     serial.setPortName("");
 
-    QString name = fileName;
+    QString name = fileName;    
 
     QString lineData;
+    lineData.append("\r");
 
     if(serial.open(QIODevice::ReadWrite))
     {
@@ -68,8 +69,10 @@ void GCodeHandler::handleAndSendGCodes(QString fileName)
             QTextStream i(&file);
             while(!i.atEnd())
             {
-                serial.write("M119");
+                //serial.write("M119");
                 lineData = i.readLine();
+                QByteArray ba = lineData.toLatin1();
+                serial.write(ba);
 
                 //Check for ack
                 if(serial.readLine() == "ok")
@@ -78,7 +81,6 @@ void GCodeHandler::handleAndSendGCodes(QString fileName)
                 } else {
                     //Wrong read
                 }
-
             }
             file.close();
         }
