@@ -17,9 +17,10 @@ public:
     explicit DeviceDialog(QWidget *parent = 0);
     ~DeviceDialog();
 
+    int btnNumber;
+
 private slots:
     void on_deviceDialogSDCardBtn_clicked();
-
     void on_deviceDialogUSBBtn_clicked();
 
 private:

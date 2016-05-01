@@ -5,10 +5,8 @@ DeviceDialog::DeviceDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DeviceDialog)
 {
+    btnNumber = 0;
     ui->setupUi(this);
-
-    //figureDialog = new FigureDialog;
-    //fileDialog = new FileDialog;
 }
 
 DeviceDialog::~DeviceDialog()
@@ -18,16 +16,12 @@ DeviceDialog::~DeviceDialog()
 
 void DeviceDialog::on_deviceDialogSDCardBtn_clicked()
 {
-    FigureDialog figureDialog;
-    figureDialog.setModal(true);
-    figureDialog.exec();
+    btnNumber = 1;
     close();
 }
 
 void DeviceDialog::on_deviceDialogUSBBtn_clicked()
 {
-    FileDialog fileDialog;
-    fileDialog.setModal(true);
-    fileDialog.exec();
+    btnNumber = 2;
     close();
 }
